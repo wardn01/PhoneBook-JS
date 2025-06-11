@@ -1,0 +1,122 @@
+<!-- ורד נגאר 325523017 -->
+<!-- מוחמד ריאן 327640835 -->
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phone Book</title>
+    <link rel="stylesheet" href="./index.css" />
+    <link rel="icon" href="./img/iconPhoneBook.png" />
+  </head>
+  <body>
+    <header>
+      <h1>Phone Book</h1>
+    </header>
+
+    <main>
+      <p id="person-count">4 persons</p>
+
+      <section class="controls">
+        <input type="text" id="searchInput" placeholder="Search contacts..." />
+        <div class="buttons">
+          <button title="Add Contact">👤➕ Add</button>
+          <button title="Delete All">🗑️ Delete All</button>
+        </div>
+      </section>
+
+      <ul class="contact-list">
+        <li class="contact-item">
+          <img class="avatar" src="./img/Alhaitham.webp" alt="Alhaitham" />
+          <div class="contact-info">
+            <h3>Alhaitham</h3>
+            <p>0525252525</p>
+            <!-- <p>alhaitham@gmail.com</p>
+            <p>address: "Sumeru"</p>
+            <p>age: 30</p>
+            <p>avatar: "img/Alhaitham.webp"</p> -->
+          </div>
+          <div class="contact-actions">
+            <button title="Info">ℹ️</button>
+            <button title="Edit">✏️</button>
+            <button title="Remove">🗑️</button>
+          </div>
+        </li>
+
+        <li class="contact-item">
+          <img class="avatar" src="./img/Kinich.webp" alt="Kinich" />
+          <div class="contact-info">
+            <h3>Kinich</h3>
+            <p>0585858585</p>
+            <!-- <p>kinich@gmail.com</p>
+            <p>address: "Sumeruro"</p>
+            <p>age: 15</p>
+            <p>avatar: "img/Kinich.webp"</p> -->
+          </div>
+          <div class="contact-actions">
+            <button title="Info">ℹ️</button>
+            <button title="Edit">✏️</button>
+            <button title="Remove">🗑️</button>
+          </div>
+        </li>
+
+        <li class="contact-item">
+          <img class="avatar" src="./img/Eula.webp" alt="Eula" />
+          <div class="contact-info">
+            <h3>Eula</h3>
+            <p>0505050505</p>
+            <!-- <p>Eula@gmail.com</p>
+            <p>address: "Sume"</p>
+            <p>age: 29</p>
+            <p>avatar: "img/Eula.webp"</p> -->
+          </div>
+          <div class="contact-actions">
+            <button title="Info">ℹ️</button>
+            <button title="Edit">✏️</button>
+            <button title="Remove">🗑️</button>
+          </div>
+        </li>
+
+        <li class="contact-item">
+          <img class="avatar" src="./img/Wriothesley.webp" alt="Wriothesley" />
+          <div class="contact-info">
+            <h3>Wriothesley</h3>
+            <p>0545454545</p>
+            <!-- <p>wriothesley@gmail.com</p>
+                    <p>address: "Sume"</p>
+                    <p>age: 29</p>
+                    <p>avatar: "img/Wriothesley.webp"</p> -->
+          </div>
+          <div class="contact-actions">
+            <button title="Info">ℹ️</button>
+            <button title="Edit">✏️</button>
+            <button title="Remove">🗑️</button>
+          </div>
+        </li>
+
+      </ul>
+
+      <!-- popup -->
+
+      <div id="popup" class="popup">
+        <div class="popup-content">
+          <span id="close-popup" class="close-btn">&times;</span>
+          <h3 id="popup-name"></h3>
+          <p><strong>Phone:</strong> <span id="popup-phone"></span></p>
+          <p><strong>Email:</strong> <span id="popup-email"></span></p>
+          <p><strong>Address:</strong> <span id="popup-address"></span></p>
+          <p><strong>Age:</strong> <span id="popup-age"></span></p>
+          <p><strong>Avatar:</strong> <span id="popup-avatar"></span></p>
+        </div>
+      </div>
+
+    </main>
+
+    <footer>
+      <p>Created by [Ward & Mohammed]</p>
+    </footer>
+
+  </body>
+  <script src="./index.js"></script>
+</html>
