@@ -40,6 +40,7 @@ const contacts = [
 
 // Get the element
 const contactList = document.querySelector(".contact-list");
+const deleteAllBtn = document.getElementById("delete-all");
 
 // Create a single contact item element
 function createContactItem(contact) {
@@ -69,6 +70,11 @@ function renderContacts() {
     contactList.appendChild(item); // Add it to the list
   });
 }
+
+// Button -> Delete all
+deleteAllBtn.addEventListener("click", () => {
+  contactList.innerHTML = "";
+});
 
 // Initial rendering when the page loads
 renderContacts();

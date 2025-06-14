@@ -5,7 +5,7 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Phone Book</title>
     <link rel="stylesheet" href="./index.css" />
     <link rel="icon" href="./img/iconPhoneBook.png" />
@@ -21,14 +21,12 @@
       <section class="controls">
         <input type="text" id="searchInput" placeholder="Search contacts..." />
         <div class="buttons">
-          <button title="Add Contact">👤➕ Add</button>
-          <button title="Delete All">🗑️ Delete All</button>
+          <button id="add-contact" title="Add Contact">👤➕ Add</button>
+          <button id="delete-all" title="Delete All">🗑️ Delete All</button>
         </div>
       </section>
 
-      <ul class="contact-list">
-
-      </ul>
+      <ul class="contact-list"></ul>
 
       <!-- popup -->
 
@@ -43,13 +41,11 @@
           <p><strong>Avatar:</strong> <span id="popup-avatar"></span></p>
         </div>
       </div>
-
     </main>
 
     <footer>
       <p>Created by [Ward & Mohammed]</p>
     </footer>
-
   </body>
   <script src="./index.js"></script>
 </html>
