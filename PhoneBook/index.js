@@ -42,6 +42,7 @@ const contacts = [
 const contactList = document.querySelector(".contact-list");
 const deleteAllBtn = document.getElementById("delete-all");
 
+
 // Create a single contact item element
 function createContactItem(contact) {
   const li = document.createElement("li");
@@ -59,6 +60,13 @@ function createContactItem(contact) {
       <button class="remove-btn" title="Remove">🗑️</button>
     </div>
   `;
+
+   // Button -> Delete One
+   const deleteOneBtn = li.querySelector(".remove-btn");
+   deleteOneBtn.addEventListener("click" , () => {
+   li.remove();
+
+  });
 
   return li; // Return the <li> element to be added to the list
 }
