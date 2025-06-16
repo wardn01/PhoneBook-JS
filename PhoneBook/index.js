@@ -65,11 +65,30 @@ function createContactItem(contact) {
    const deleteOneBtn = li.querySelector(".remove-btn");
    deleteOneBtn.addEventListener("click" , () => {
    li.remove();
+    });
 
-  });
+   // Button -> Info
+    const infoBtn = li.querySelector(".info-btn");
+    infoBtn.addEventListener("click", () => {
+    const popup = document.getElementById("popup");
+    document.getElementById("popup-name").textContent = contact.name;
+    document.getElementById("popup-phone").textContent = contact.phone;
+    document.getElementById("popup-email").textContent = contact.email || "N/A";
+    document.getElementById("popup-address").textContent = contact.address || "N/A";
+    document.getElementById("popup-age").textContent = contact.age || "N/A";
+    document.getElementById("popup-avatar").src = contact.avatar;
+    document.getElementById("popup-avatar").alt = contact.name;
+    popup.style.display = "flex";
+    });
 
   return li; // Return the <li> element to be added to the list
 }
+
+// Close popup on click
+const closeBtn = document.getElementById("close-popup");
+closeBtn.addEventListener("click", () => {
+document.getElementById("popup").style.display = "none";
+});
 
 // Render all contacts to the contact list
 function renderContacts() {
