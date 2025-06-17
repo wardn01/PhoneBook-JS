@@ -160,6 +160,9 @@ footer {
 #popup-add {
   display: none;
 }
+#popup-edit {
+  display: none;
+}
 
 .popup-content {
   background: white;
@@ -198,14 +201,17 @@ footer {
   cursor: pointer;
 }
 
-#form-add-contact {
+#form-add-contact,
+#form-edit-contact {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
 
 #form-add-contact input,
-#form-add-contact button {
+#form-edit-contact input,
+#form-add-contact button,
+#form-edit-contact button {
   padding: 10px;
   font-size: 15px;
   border: 1px solid #ccc;
@@ -213,13 +219,15 @@ footer {
   transition: border-color 0.3s ease;
 }
 
-#form-add-contact button {
+#form-add-contact button,
+#form-edit-contact button {
   background-color: #2a9df4;
   color: white;
   border: none;
   cursor: pointer;
 }
 
-#form-add-contact button:hover {
+#form-add-contact button:hover,
+#form-edit-contact button:hover {
   background-color: #1d7fc1;
 }

@@ -42,6 +42,9 @@ const contacts = [
 const contactList = document.querySelector(".contact-list");
 const deleteAllBtn = document.getElementById("delete-all");
 
+// Get index for contact ToEdit
+let editingIndex = null;
+
 // Function to create a contact <li> element
 function createContactItem(contact) {
   const li = document.createElement("li");
@@ -80,8 +83,62 @@ function createContactItem(contact) {
     document.getElementById("popup-avatar").alt = contact.name;
   });
 
+  // Button -> Edit
+  const editBtn = li.querySelector(".edit-btn");
+  editBtn.addEventListener("click", () => {
+    const popupEdit = document.getElementById("popup-edit");
+    popupEdit.style.display = "flex";
+
+    document.getElementById("edit-name").value = contact.name;
+    document.getElementById("edit-phone").value = contact.phone;
+    document.getElementById("edit-email").value =
+      contact.email !== "N/A" ? contact.email : "";
+    document.getElementById("edit-address").value =
+      contact.address !== "N/A" ? contact.address : "";
+    document.getElementById("edit-age").value =
+      contact.age !== "N/A" ? contact.age : "";
+
+    editingIndex = contacts.indexOf(contact);
+  });
+
   return li;
 }
+
+// Edit fields for the Contact popup
+const formEditContact = document.getElementById("form-edit-contact");
+const popupEdit = document.getElementById("popup-edit");
+
+// Button -> Edit
+formEditContact.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  if (editingIndex === null) return;
+
+  // Update
+  const contact = contacts[editingIndex];
+
+  contact.name = document.getElementById("edit-name").value.trim();
+  contact.phone = document.getElementById("edit-phone").value.trim();
+  contact.email = document.getElementById("edit-email").value.trim() || "N/A";
+  contact.address =
+    document.getElementById("edit-address").value.trim() || "N/A";
+  contact.age =
+    parseInt(document.getElementById("edit-age").value.trim()) || "N/A";
+
+  // Update img
+  const avatarInput = document.getElementById("edit-avatar");
+  if (avatarInput.files.length > 0) {
+    contact.avatar = URL.createObjectURL(avatarInput.files[0]);
+  }
+
+  // Render all contacts again
+  contactList.innerHTML = "";
+  renderContacts();
+
+  // Close popup
+  document.getElementById("popup-edit").style.display = "none";
+  editingIndex = null;
+});
 
 // Input fields for the Add Contact popup
 const inputAddName = document.getElementById("add-name");
@@ -134,14 +191,18 @@ formAddContact.addEventListener("submit", (e) => {
 });
 
 //  Button -> Close popup
-const closeInfoBtn = document.getElementById("close-popup");
+const closeInfoBtn = document.getElementById("close-popup-info");
 const closeAddBtn = document.getElementById("close-popup-add");
+const closeEditBtn = document.getElementById("close-popup-edit");
 
 closeInfoBtn.addEventListener("click", () => {
   document.getElementById("popup-info").style.display = "none";
 });
 closeAddBtn.addEventListener("click", () => {
   document.getElementById("popup-add").style.display = "none";
+});
+closeEditBtn.addEventListener("click", () => {
+  document.getElementById("popup-edit").style.display = "none";
 });
 
 // Render all contacts to the contact list
