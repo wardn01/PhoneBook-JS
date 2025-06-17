@@ -66,6 +66,10 @@ function createContactItem(contact) {
   // Button -> Delete One
   const deleteOneBtn = li.querySelector(".remove-btn");
   deleteOneBtn.addEventListener("click", () => {
+    const index = contacts.indexOf(contact);
+    if (index !== -1) {
+      contacts.splice(index, 1);
+    }
     li.remove();
   });
 
@@ -215,7 +219,9 @@ function renderContacts() {
 
 // Button -> Delete all
 deleteAllBtn.addEventListener("click", () => {
+  contacts.length = 0;
   contactList.innerHTML = "";
+  editingIndex = null;
 });
 
 // Initial rendering when the page loads
