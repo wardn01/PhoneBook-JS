@@ -21,16 +21,15 @@
       <section class="controls">
         <input type="text" id="searchInput" placeholder="Search contacts..." />
         <div class="buttons">
-          <button id="add-contact" title="Add Contact">👤➕ Add</button>
+          <button id="add-btn" title="Add Contact">👤➕ Add</button>
           <button id="delete-all" title="Delete All">🗑️ Delete All</button>
         </div>
       </section>
 
       <ul class="contact-list"></ul>
 
-      <!-- popup -->
-
-      <div id="popup" class="popup">
+      <!-- popup Info Contact -->
+      <div id="popup-info" class="popup">
         <div class="popup-content">
           <span id="close-popup" class="close-btn">&times;</span>
           <p id="avatarP"><img id="popup-avatar"></img></p>
@@ -41,6 +40,24 @@
           <p><strong>Age:</strong> <span id="popup-age"></span></p>
         </div>
       </div>
+
+       <!-- popup Add Contact -->
+      <div id="popup-add" class="popup">
+        <div class="popup-content">
+          <span id="close-popup-add" class="close-btn">&times;</span>
+          <h3>Add Contact</h3>
+          <form id="form-add-contact">
+            <input type="text" id="add-name" placeholder="Name" required />
+            <input type="tel" id="add-phone" placeholder="Phone" required />
+            <input type="email" id="add-email" placeholder="Email" />
+            <input type="text" id="add-address" placeholder="Address" />
+            <input type="number" id="add-age" placeholder="Age" min="0" />
+            <input type="file" id="add-avatar" accept="image/*" />
+            <button type="submit"><strong>Add Contact</strong></button>
+          </form>
+        </div>
+      </div>
+
     </main>
 
     <footer>

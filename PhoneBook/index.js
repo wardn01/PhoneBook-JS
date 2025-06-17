@@ -42,8 +42,7 @@ const contacts = [
 const contactList = document.querySelector(".contact-list");
 const deleteAllBtn = document.getElementById("delete-all");
 
-
-// Create a single contact item element
+// Function to create a contact <li> element
 function createContactItem(contact) {
   const li = document.createElement("li");
   li.className = "contact-item";
@@ -61,40 +60,95 @@ function createContactItem(contact) {
     </div>
   `;
 
-   // Button -> Delete One
-   const deleteOneBtn = li.querySelector(".remove-btn");
-   deleteOneBtn.addEventListener("click" , () => {
-   li.remove();
-    });
+  // Button -> Delete One
+  const deleteOneBtn = li.querySelector(".remove-btn");
+  deleteOneBtn.addEventListener("click", () => {
+    li.remove();
+  });
 
-   // Button -> Info
-    const infoBtn = li.querySelector(".info-btn");
-    infoBtn.addEventListener("click", () => {
-    const popup = document.getElementById("popup");
+  // Button -> Info
+  const infoBtn = li.querySelector(".info-btn");
+  infoBtn.addEventListener("click", () => {
+    document.getElementById("popup-info").style.display = "flex";
     document.getElementById("popup-name").textContent = contact.name;
     document.getElementById("popup-phone").textContent = contact.phone;
     document.getElementById("popup-email").textContent = contact.email || "N/A";
-    document.getElementById("popup-address").textContent = contact.address || "N/A";
+    document.getElementById("popup-address").textContent =
+      contact.address || "N/A";
     document.getElementById("popup-age").textContent = contact.age || "N/A";
     document.getElementById("popup-avatar").src = contact.avatar;
     document.getElementById("popup-avatar").alt = contact.name;
-    popup.style.display = "flex";
-    });
+  });
 
-  return li; // Return the <li> element to be added to the list
+  return li;
 }
 
-// Close popup on click
-const closeBtn = document.getElementById("close-popup");
-closeBtn.addEventListener("click", () => {
-document.getElementById("popup").style.display = "none";
+// Input fields for the Add Contact popup
+const inputAddName = document.getElementById("add-name");
+const inputAddPhone = document.getElementById("add-phone");
+const inputAddEmail = document.getElementById("add-email");
+const inputAddAddress = document.getElementById("add-address");
+const inputAddAge = document.getElementById("add-age");
+const inputAddAvatar = document.getElementById("add-avatar");
+const addBtn = document.getElementById("add-btn");
+
+// Button -> Add
+addBtn.addEventListener("click", () => {
+  document.getElementById("popup-add").style.display = "flex";
+  inputAddName.value = "";
+  inputAddPhone.value = "";
+  inputAddEmail.value = "";
+  inputAddAddress.value = "";
+  inputAddAge.value = "";
+  inputAddAvatar.value = "";
+});
+
+// Form submission - To Add new contact
+const formAddContact = document.getElementById("form-add-contact");
+
+formAddContact.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  // Use default image if none is uploaded
+  let avatarURL = "./img/default-avatar.jpg";
+  if (inputAddAvatar.files.length > 0) {
+    avatarURL = URL.createObjectURL(inputAddAvatar.files[0]);
+  }
+
+  const newContact = {
+    name: inputAddName.value.trim(),
+    phone: inputAddPhone.value.trim(),
+    email: inputAddEmail.value.trim() || "N/A",
+    address: inputAddAddress.value.trim() || "N/A",
+    age: parseInt(inputAddAge.value.trim()) || "N/A",
+    avatar: avatarURL,
+  };
+
+  // Add to contacts array
+  contacts.push(newContact);
+  const newItem = createContactItem(newContact);
+  contactList.appendChild(newItem);
+
+  // Close popup
+  document.getElementById("popup-add").style.display = "none";
+});
+
+//  Button -> Close popup
+const closeInfoBtn = document.getElementById("close-popup");
+const closeAddBtn = document.getElementById("close-popup-add");
+
+closeInfoBtn.addEventListener("click", () => {
+  document.getElementById("popup-info").style.display = "none";
+});
+closeAddBtn.addEventListener("click", () => {
+  document.getElementById("popup-add").style.display = "none";
 });
 
 // Render all contacts to the contact list
 function renderContacts() {
   contacts.forEach((contact) => {
-    const item = createContactItem(contact); // Create the item
-    contactList.appendChild(item); // Add it to the list
+    const item = createContactItem(contact);
+    contactList.appendChild(item);
   });
 }
 
