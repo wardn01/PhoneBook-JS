@@ -70,8 +70,12 @@ function createContactItem(contact) {
     if (index !== -1) {
       contacts.splice(index, 1);
     }
-    li.remove();
-    updatePersonCount();
+    if (currentSearchTerm) {
+      applySearchFilter();
+    } else {
+      li.remove();
+      updatePersonCount();
+    }
   });
 
   // Button -> Info
@@ -137,8 +141,12 @@ formEditContact.addEventListener("submit", (e) => {
   }
 
   // Render all contacts again
-  contactList.innerHTML = "";
-  renderContacts();
+  if (currentSearchTerm) {
+    applySearchFilter();
+  } else {
+    contactList.innerHTML = "";
+    updatePersonCount();
+  }
 
   // Close popup
   document.getElementById("popup-edit").style.display = "none";
@@ -188,12 +196,17 @@ formAddContact.addEventListener("submit", (e) => {
 
   // Add to contacts array
   contacts.push(newContact);
-  const newItem = createContactItem(newContact);
-  contactList.appendChild(newItem);
 
   // Close popup
   document.getElementById("popup-add").style.display = "none";
-  updatePersonCount();
+
+  // Re-render depending on search
+  if (currentSearchTerm) applySearchFilter();
+  else {
+    const newItem = createContactItem(newContact);
+    contactList.appendChild(newItem);
+    updatePersonCount();
+  }
 });
 
 //  Button -> Close popup
@@ -214,19 +227,27 @@ closeEditBtn.addEventListener("click", () => {
 // Updates the number of contacts shown.
 const personCountEl = document.getElementById("person-count");
 
-function updatePersonCount() {
-  const count = contacts.length;
+function updatePersonCount(count = contacts.length) {
   personCountEl.textContent = `${count} person${count !== 1 ? "s" : ""}`;
 }
 
 // Search Input
+let currentSearchTerm = "";
 document.getElementById("searchInput").addEventListener("input", function () {
-  const searchTerm = this.value.toLowerCase();
-  contactList.innerHTML = "";
-  contacts
-    .filter((c) => c.name.toLowerCase().includes(searchTerm))
-    .forEach((c) => contactList.appendChild(createContactItem(c)));
+  currentSearchTerm = this.value.toLowerCase();
+  applySearchFilter();
 });
+
+function applySearchFilter() {
+  contactList.innerHTML = "";
+  const filteredContacts = contacts.filter((c) =>
+    c.name.toLowerCase().includes(currentSearchTerm)
+  );
+  filteredContacts.forEach((c) =>
+    contactList.appendChild(createContactItem(c))
+  );
+  updatePersonCount(filteredContacts.length);
+}
 
 // Render all contacts to the contact list
 function renderContacts() {
