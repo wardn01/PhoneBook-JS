@@ -71,6 +71,7 @@ function createContactItem(contact) {
       contacts.splice(index, 1);
     }
     li.remove();
+    updatePersonCount();
   });
 
   // Button -> Info
@@ -192,6 +193,7 @@ formAddContact.addEventListener("submit", (e) => {
 
   // Close popup
   document.getElementById("popup-add").style.display = "none";
+  updatePersonCount();
 });
 
 //  Button -> Close popup
@@ -209,6 +211,14 @@ closeEditBtn.addEventListener("click", () => {
   document.getElementById("popup-edit").style.display = "none";
 });
 
+// Updates the number of contacts shown.
+const personCountEl = document.getElementById("person-count");
+
+function updatePersonCount() {
+  const count = contacts.length;
+  personCountEl.textContent = `${count} person${count !== 1 ? "s" : ""}`;
+}
+
 // Render all contacts to the contact list
 function renderContacts() {
   contacts.forEach((contact) => {
@@ -222,7 +232,9 @@ deleteAllBtn.addEventListener("click", () => {
   contacts.length = 0;
   contactList.innerHTML = "";
   editingIndex = null;
+  updatePersonCount();
 });
 
 // Initial rendering when the page loads
+updatePersonCount();
 renderContacts();
