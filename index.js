@@ -219,6 +219,15 @@ function updatePersonCount() {
   personCountEl.textContent = `${count} person${count !== 1 ? "s" : ""}`;
 }
 
+// Search Input
+document.getElementById("searchInput").addEventListener("input", function () {
+  const searchTerm = this.value.toLowerCase();
+  contactList.innerHTML = "";
+  contacts
+    .filter((c) => c.name.toLowerCase().includes(searchTerm))
+    .forEach((c) => contactList.appendChild(createContactItem(c)));
+});
+
 // Render all contacts to the contact list
 function renderContacts() {
   contacts.forEach((contact) => {
