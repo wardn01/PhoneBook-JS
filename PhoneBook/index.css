@@ -231,3 +231,11 @@ footer {
 #form-edit-contact button:hover {
   background-color: #1d7fc1;
 }
+
+#empty-phone {
+  display: none;
+  text-align: center;
+  color: gray;
+  font-size: 1.2em;
+  margin-top: 100px;
+}

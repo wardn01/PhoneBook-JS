@@ -144,7 +144,6 @@ formEditContact.addEventListener("submit", (e) => {
   if (currentSearchTerm) {
     applySearchFilter();
   } else {
-    contactList.innerHTML = "";
     updatePersonCount();
   }
 
@@ -229,6 +228,18 @@ const personCountEl = document.getElementById("person-count");
 
 function updatePersonCount(count = contacts.length) {
   personCountEl.textContent = `${count} person${count !== 1 ? "s" : ""}`;
+  toggleEmptyPhone();
+}
+
+// Show/hide message by contacts count.
+const emptyPhone = document.getElementById("empty-phone");
+
+function toggleEmptyPhone() {
+  if (contacts.length === 0) {
+    emptyPhone.style.display = "block";
+  } else {
+    emptyPhone.style.display = "none";
+  }
 }
 
 // Search Input
