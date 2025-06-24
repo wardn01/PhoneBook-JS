@@ -113,6 +113,15 @@ function createContactItem(contact) {
     editingIndex = contacts.indexOf(contact);
   });
 
+  // Hover effect via JS
+  li.addEventListener("mouseover", () => {
+    li.classList.add("contact-hover");
+  });
+
+  li.addEventListener("mouseout", () => {
+    li.classList.remove("contact-hover");
+  });
+
   return li;
 }
 

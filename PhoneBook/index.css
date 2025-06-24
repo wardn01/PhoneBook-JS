@@ -245,3 +245,9 @@ footer {
   color: red;
   font-size: 14px;
 }
+
+.contact-hover {
+  background-color: #cce6ff;
+  transform: scale(1.01);
+  transition: all 0.15s ease-in-out;
+}
