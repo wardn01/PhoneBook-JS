@@ -41,6 +41,8 @@ const contacts = [
 // Get the element
 const contactList = document.querySelector(".contact-list");
 const deleteAllBtn = document.getElementById("delete-all");
+const addNameError = document.getElementById("name-error");
+const editNameError = document.getElementById("edit-name-error");
 
 // Get index for contact ToEdit
 let editingIndex = null;
@@ -97,6 +99,7 @@ function createContactItem(contact) {
   editBtn.addEventListener("click", () => {
     const popupEdit = document.getElementById("popup-edit");
     popupEdit.style.display = "flex";
+    editNameError.style.display = "none";
 
     document.getElementById("edit-name").value = contact.name;
     document.getElementById("edit-phone").value = contact.phone;
@@ -123,6 +126,13 @@ formEditContact.addEventListener("submit", (e) => {
 
   if (editingIndex === null) return;
 
+  const newName = document.getElementById("edit-name").value.trim();
+
+  if (isNameDuplicate(newName, editingIndex)) {
+    editNameError.style.display = "block";
+    return;
+  }
+
   // Update
   const contact = contacts[editingIndex];
 
@@ -141,9 +151,12 @@ formEditContact.addEventListener("submit", (e) => {
   }
 
   // Render all contacts again
+  sortContactsByName();
   if (currentSearchTerm) {
     applySearchFilter();
   } else {
+    contactList.innerHTML = "";
+    renderContacts();
     updatePersonCount();
   }
 
@@ -164,6 +177,7 @@ const addBtn = document.getElementById("add-btn");
 // Button -> Add
 addBtn.addEventListener("click", () => {
   document.getElementById("popup-add").style.display = "flex";
+  addNameError.style.display = "none";
   inputAddName.value = "";
   inputAddPhone.value = "";
   inputAddEmail.value = "";
@@ -177,6 +191,13 @@ const formAddContact = document.getElementById("form-add-contact");
 
 formAddContact.addEventListener("submit", (e) => {
   e.preventDefault();
+
+  const trimmedName = inputAddName.value.trim();
+
+  if (isNameDuplicate(trimmedName)) {
+    addNameError.style.display = "block";
+    return;
+  }
 
   // Use default image if none is uploaded
   let avatarURL = "./img/default-avatar.jpg";
@@ -200,10 +221,11 @@ formAddContact.addEventListener("submit", (e) => {
   document.getElementById("popup-add").style.display = "none";
 
   // Re-render depending on search
+  sortContactsByName();
   if (currentSearchTerm) applySearchFilter();
   else {
-    const newItem = createContactItem(newContact);
-    contactList.appendChild(newItem);
+    contactList.innerHTML = "";
+    renderContacts();
     updatePersonCount();
   }
 });
@@ -260,6 +282,20 @@ function applySearchFilter() {
   updatePersonCount(filteredContacts.length);
 }
 
+// name != name
+function isNameDuplicate(name, excludeIndex = null) {
+  const lowerName = name.toLowerCase();
+  return contacts.some((contact, idx) => {
+    if (excludeIndex !== null && idx === excludeIndex) return false;
+    return contact.name.toLowerCase() === lowerName;
+  });
+}
+
+// Sort
+function sortContactsByName() {
+  contacts.sort((a, b) => a.name.localeCompare(b.name));
+}
+
 // Render all contacts to the contact list
 function renderContacts() {
   contacts.forEach((contact) => {
@@ -278,4 +314,5 @@ deleteAllBtn.addEventListener("click", () => {
 
 // Initial rendering when the page loads
 updatePersonCount();
+sortContactsByName();
 renderContacts();

@@ -48,6 +48,7 @@
           <h3>Add Contact</h3>
           <form id="form-add-contact">
             <input type="text" id="add-name" placeholder="Name" required />
+            <span id="name-error" class="error-message">Name already exists!</span>
             <input type="tel" id="add-phone" placeholder="Phone" required />
             <input type="email" id="add-email" placeholder="Email" />
             <input type="text" id="add-address" placeholder="Address" />
@@ -65,6 +66,7 @@
          <h3>Edit Contact</h3>
          <form id="form-edit-contact">
            <input type="text" id="edit-name" placeholder="Name" required />
+           <span id="edit-name-error" class="error-message">Name already exists!</span>
            <input type="tel" id="edit-phone" placeholder="Phone" required />
            <input type="email" id="edit-email" placeholder="Email" />
            <input type="text" id="edit-address" placeholder="Address" />
