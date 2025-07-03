@@ -321,6 +321,44 @@ deleteAllBtn.addEventListener("click", () => {
   updatePersonCount();
 });
 
+// Change button html Snow And start Snow
+const snowToggleBtn = document.getElementById("snow-toggle-btn");
+let snowing = false;
+let snowInterval = null;
+
+snowToggleBtn.addEventListener("click", () => {
+  snowing = !snowing;
+
+  if (snowing) {
+    snowToggleBtn.textContent = "⛔️";
+    snowInterval = setInterval(createSnowflake, 200);
+  } else {
+    snowToggleBtn.textContent = "❄️";
+    clearInterval(snowInterval);
+  }
+});
+
+// Animations Snow
+function createSnowflake() {
+  const snowflake = document.createElement("div");
+  snowflake.className = "snowflake";
+  snowflake.textContent = "❄️";
+
+  // Random
+  snowflake.style.left = Math.random() * window.innerWidth + "px";
+
+  // Speed
+  const duration = Math.random() * 3 + 2;
+  snowflake.style.animationDuration = `${duration}s`;
+
+  document.body.appendChild(snowflake);
+
+  // Delete
+  setTimeout(() => {
+    snowflake.remove();
+  }, duration * 1000);
+}
+
 // Initial rendering when the page loads
 updatePersonCount();
 sortContactsByName();
