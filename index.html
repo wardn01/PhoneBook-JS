@@ -49,9 +49,9 @@
           <span id="close-popup-add" class="close-btn">&times;</span>
           <h3>Add Contact</h3>
           <form id="form-add-contact">
-            <input type="text" id="add-name" placeholder="Name" required />
+            <input type="text" id="add-name" placeholder="Name" maxlength="20" required />
             <span id="name-error" class="error-message">Name already exists!</span>
-            <input type="tel" id="add-phone" placeholder="Phone" required />
+            <input type="tel" id="add-phone" placeholder="Phone" minlength="9" maxlength="12" required />
             <input type="email" id="add-email" placeholder="Email" />
             <input type="text" id="add-address" placeholder="Address" />
             <input type="number" id="add-age" placeholder="Age" min="0" />
@@ -67,9 +67,9 @@
          <span id="close-popup-edit" class="close-btn">&times;</span>
          <h3>Edit Contact</h3>
          <form id="form-edit-contact">
-           <input type="text" id="edit-name" placeholder="Name" required />
+           <input type="text" id="edit-name" placeholder="Name" maxlength="20" required />
            <span id="edit-name-error" class="error-message">Name already exists!</span>
-           <input type="tel" id="edit-phone" placeholder="Phone" required />
+           <input type="tel" id="edit-phone" placeholder="Phone" minlength="9" maxlength="12" required />
            <input type="email" id="edit-email" placeholder="Email" />
            <input type="text" id="edit-address" placeholder="Address" />
            <input type="number" id="edit-age" placeholder="Age" min="0" />
