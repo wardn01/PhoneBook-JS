@@ -11,22 +11,20 @@
     <link rel="icon" href="./img/iconPhoneBook.png" />
   </head>
   <body>
-    
     <header>
       <h1>Phone Book</h1>
     </header>
 
     <main>
       <p id="person-count"></p>
-
-      <section class="controls">
+      <div class="controls">
         <input type="text" id="searchInput" placeholder="Search contacts..." />
         <div class="buttons">
           <button id="snow-toggle-btn" title="Snow">❄️</button>
           <button id="add-btn" title="Add Contact">👤➕ Add</button>
           <button id="delete-all" title="Delete All">🗑️ Delete All</button>
         </div>
-      </section>
+      </div>
 
       <ul class="contact-list"></ul>
 
@@ -34,8 +32,14 @@
       <div id="popup-info" class="popup">
         <div class="popup-content">
           <span id="close-popup-info" class="close-btn">&times;</span>
-          <p id="avatarP"><img id="popup-avatar"></img></p>
-          <h3 id="popup-name"></h3>
+          <p id="avatarP">
+            <img
+              id="popup-avatar"
+              src="./img/default-avatar.jpg"
+              alt="Contact Avatar"
+            />
+          </p>
+          <h3 id="popup-name">Contact Name</h3>
           <p><strong>Phone:</strong> <span id="popup-phone"></span></p>
           <p><strong>Email:</strong> <span id="popup-email"></span></p>
           <p><strong>Address:</strong> <span id="popup-address"></span></p>
@@ -43,15 +47,30 @@
         </div>
       </div>
 
-       <!-- popup Add Contact -->
+      <!-- popup Add Contact -->
       <div id="popup-add" class="popup">
         <div class="popup-content">
           <span id="close-popup-add" class="close-btn">&times;</span>
           <h3>Add Contact</h3>
           <form id="form-add-contact">
-            <input type="text" id="add-name" placeholder="Name" maxlength="20" required />
-            <span id="name-error" class="error-message">Name already exists!</span>
-            <input type="tel" id="add-phone" placeholder="Phone" minlength="9" maxlength="12" required />
+            <input
+              type="text"
+              id="add-name"
+              placeholder="Name"
+              maxlength="20"
+              required
+            />
+            <span id="name-error" class="error-message"
+              >Name already exists!</span
+            >
+            <input
+              type="tel"
+              id="add-phone"
+              placeholder="Phone"
+              minlength="9"
+              maxlength="12"
+              required
+            />
             <input type="email" id="add-email" placeholder="Email" />
             <input type="text" id="add-address" placeholder="Address" />
             <input type="number" id="add-age" placeholder="Age" min="0" />
@@ -62,30 +81,44 @@
       </div>
 
       <!-- popup Edit Contact -->
-     <div id="popup-edit" class="popup" style="display:none;">
-       <div class="popup-content">
-         <span id="close-popup-edit" class="close-btn">&times;</span>
-         <h3>Edit Contact</h3>
-         <form id="form-edit-contact">
-           <input type="text" id="edit-name" placeholder="Name" maxlength="20" required />
-           <span id="edit-name-error" class="error-message">Name already exists!</span>
-           <input type="tel" id="edit-phone" placeholder="Phone" minlength="9" maxlength="12" required />
-           <input type="email" id="edit-email" placeholder="Email" />
-           <input type="text" id="edit-address" placeholder="Address" />
-           <input type="number" id="edit-age" placeholder="Age" min="0" />
-           <input type="file" id="edit-avatar" accept="image/*" />
-           <button type="submit"><strong>Save Changes</strong></button>
-         </form>
+      <div id="popup-edit" class="popup" style="display: none">
+        <div class="popup-content">
+          <span id="close-popup-edit" class="close-btn">&times;</span>
+          <h3>Edit Contact</h3>
+          <form id="form-edit-contact">
+            <input
+              type="text"
+              id="edit-name"
+              placeholder="Name"
+              maxlength="20"
+              required
+            />
+            <span id="edit-name-error" class="error-message"
+              >Name already exists!</span
+            >
+            <input
+              type="tel"
+              id="edit-phone"
+              placeholder="Phone"
+              minlength="9"
+              maxlength="12"
+              required
+            />
+            <input type="email" id="edit-email" placeholder="Email" />
+            <input type="text" id="edit-address" placeholder="Address" />
+            <input type="number" id="edit-age" placeholder="Age" min="0" />
+            <input type="file" id="edit-avatar" accept="image/*" />
+            <button type="submit"><strong>Save Changes</strong></button>
+          </form>
         </div>
-     </div>  
+      </div>
 
-     <div id="empty-phone"><p>No contacts to display</p>
-</div>
+      <div id="empty-phone"><p>No contacts to display</p></div>
     </main>
 
     <footer>
       <p>Created by [Ward & Mohammed]</p>
     </footer>
+    <script src="./index.js"></script>
   </body>
-  <script src="./index.js"></script>
 </html>

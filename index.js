@@ -38,20 +38,21 @@ const contacts = [
   },
 ];
 
-// Get the element
+// Get the element.
 const contactList = document.querySelector(".contact-list");
 const deleteAllBtn = document.getElementById("delete-all");
 const addNameError = document.getElementById("name-error");
 const editNameError = document.getElementById("edit-name-error");
 
-// Get index for contact ToEdit
+// Get index for contact ToEdit.
 let editingIndex = null;
 
-// Function to create a contact <li> element
+// Function to create a contact <li> element.
 function createContactItem(contact) {
   const li = document.createElement("li");
   li.className = "contact-item";
 
+  // Set inner HTML for the contact.
   li.innerHTML = `
     <img class="avatar" src="${contact.avatar}" alt="${contact.name}" />
     <div class="contact-info">
@@ -65,7 +66,7 @@ function createContactItem(contact) {
     </div>
   `;
 
-  // Button -> Delete One
+  // Button To -> Delete single contact.
   const deleteOneBtn = li.querySelector(".remove-btn");
   deleteOneBtn.addEventListener("click", () => {
     const index = contacts.indexOf(contact);
@@ -80,7 +81,7 @@ function createContactItem(contact) {
     }
   });
 
-  // Button -> Info
+  // Button To -> Show contact full info in popup.
   const infoBtn = li.querySelector(".info-btn");
   infoBtn.addEventListener("click", () => {
     document.getElementById("popup-info").style.display = "flex";
@@ -94,7 +95,7 @@ function createContactItem(contact) {
     document.getElementById("popup-avatar").alt = contact.name;
   });
 
-  // Button -> Edit
+  // Button To ->  Open edit popup for the contact.
   const editBtn = li.querySelector(".edit-btn");
   editBtn.addEventListener("click", () => {
     const popupEdit = document.getElementById("popup-edit");
@@ -113,7 +114,7 @@ function createContactItem(contact) {
     editingIndex = contacts.indexOf(contact);
   });
 
-  // Hover effect via JS
+  // Hover effect via JS.
   li.addEventListener("mouseover", () => {
     li.classList.add("contact-hover");
   });
@@ -125,11 +126,11 @@ function createContactItem(contact) {
   return li;
 }
 
-// Edit fields for the Contact popup
+// Edit fields for the Contact popup.
 const formEditContact = document.getElementById("form-edit-contact");
 const popupEdit = document.getElementById("popup-edit");
 
-// Button -> Edit
+// Button To -> Handle edit form submit.
 formEditContact.addEventListener("submit", (e) => {
   e.preventDefault();
 
@@ -142,7 +143,7 @@ formEditContact.addEventListener("submit", (e) => {
     return;
   }
 
-  // Update
+  // Update contact data.
   const contact = contacts[editingIndex];
 
   contact.name = document.getElementById("edit-name").value.trim();
@@ -153,13 +154,13 @@ formEditContact.addEventListener("submit", (e) => {
   contact.age =
     parseInt(document.getElementById("edit-age").value.trim()) || "N/A";
 
-  // Update img
+  // Update avatar.
   const avatarInput = document.getElementById("edit-avatar");
   if (avatarInput.files.length > 0) {
     contact.avatar = URL.createObjectURL(avatarInput.files[0]);
   }
 
-  // Render all contacts again
+  // Refresh contact list.
   sortContactsByName();
   if (currentSearchTerm) {
     applySearchFilter();
@@ -169,12 +170,12 @@ formEditContact.addEventListener("submit", (e) => {
     updatePersonCount();
   }
 
-  // Close popup
+  // Close popup.
   document.getElementById("popup-edit").style.display = "none";
   editingIndex = null;
 });
 
-// Input fields for the Add Contact popup
+// Input fields (add contact form).
 const inputAddName = document.getElementById("add-name");
 const inputAddPhone = document.getElementById("add-phone");
 const inputAddEmail = document.getElementById("add-email");
@@ -183,7 +184,7 @@ const inputAddAge = document.getElementById("add-age");
 const inputAddAvatar = document.getElementById("add-avatar");
 const addBtn = document.getElementById("add-btn");
 
-// Button -> Add
+// Button To -> Show add popup.
 addBtn.addEventListener("click", () => {
   document.getElementById("popup-add").style.display = "flex";
   addNameError.style.display = "none";
@@ -195,7 +196,7 @@ addBtn.addEventListener("click", () => {
   inputAddAvatar.value = "";
 });
 
-// Form submission - To Add new contact
+// Form submission To Add new contact.
 const formAddContact = document.getElementById("form-add-contact");
 
 formAddContact.addEventListener("submit", (e) => {
@@ -208,7 +209,7 @@ formAddContact.addEventListener("submit", (e) => {
     return;
   }
 
-  // Use default image if none is uploaded
+  // Set default avatar if not uploaded.
   let avatarURL = "./img/default-avatar.jpg";
   if (inputAddAvatar.files.length > 0) {
     avatarURL = URL.createObjectURL(inputAddAvatar.files[0]);
@@ -223,13 +224,13 @@ formAddContact.addEventListener("submit", (e) => {
     avatar: avatarURL,
   };
 
-  // Add to contacts array
+  // Add to contacts array.
   contacts.push(newContact);
 
   // Close popup
   document.getElementById("popup-add").style.display = "none";
 
-  // Re-render depending on search
+  // Re-render depending on search.
   sortContactsByName();
   if (currentSearchTerm) applySearchFilter();
   else {
@@ -239,7 +240,7 @@ formAddContact.addEventListener("submit", (e) => {
   }
 });
 
-//  Button -> Close popup
+//  Button To -> Close popup.
 const closeInfoBtn = document.getElementById("close-popup-info");
 const closeAddBtn = document.getElementById("close-popup-add");
 const closeEditBtn = document.getElementById("close-popup-edit");
@@ -254,7 +255,7 @@ closeEditBtn.addEventListener("click", () => {
   document.getElementById("popup-edit").style.display = "none";
 });
 
-// Updates the number of contacts shown.
+// Update number of displayed contacts.
 const personCountEl = document.getElementById("person-count");
 
 function updatePersonCount(count = contacts.length) {
@@ -262,7 +263,7 @@ function updatePersonCount(count = contacts.length) {
   toggleEmptyPhone();
 }
 
-// Show/hide message by contacts count.
+// Show "no contacts" message when empty.
 const emptyPhone = document.getElementById("empty-phone");
 
 function toggleEmptyPhone() {
@@ -273,13 +274,14 @@ function toggleEmptyPhone() {
   }
 }
 
-// Search Input
+// Search input and filtering
 let currentSearchTerm = "";
 document.getElementById("searchInput").addEventListener("input", function () {
   currentSearchTerm = this.value.toLowerCase();
   applySearchFilter();
 });
 
+// Filter contacts by search term.
 function applySearchFilter() {
   contactList.innerHTML = "";
   const filteredContacts = contacts.filter((c) =>
@@ -291,7 +293,7 @@ function applySearchFilter() {
   updatePersonCount(filteredContacts.length);
 }
 
-// name != name
+// Check if name already exists (exclude editingIndex). / name != name
 function isNameDuplicate(name, excludeIndex = null) {
   const lowerName = name.toLowerCase();
   return contacts.some((contact, idx) => {
@@ -300,12 +302,12 @@ function isNameDuplicate(name, excludeIndex = null) {
   });
 }
 
-// Sort
+// Sort contacts alphabetically by name.
 function sortContactsByName() {
   contacts.sort((a, b) => a.name.localeCompare(b.name));
 }
 
-// Render all contacts to the contact list
+// Render the full contact list.
 function renderContacts() {
   contacts.forEach((contact) => {
     const item = createContactItem(contact);
@@ -313,7 +315,7 @@ function renderContacts() {
   });
 }
 
-// Button -> Delete all
+// Button To -> Delete all contacts.
 deleteAllBtn.addEventListener("click", () => {
   contacts.length = 0;
   contactList.innerHTML = "";
@@ -321,11 +323,12 @@ deleteAllBtn.addEventListener("click", () => {
   updatePersonCount();
 });
 
-// Change button html Snow And start Snow
+// Change button html Snow And start Snow.
 const snowToggleBtn = document.getElementById("snow-toggle-btn");
 let snowing = false;
 let snowInterval = null;
 
+// Toggle snow animation button.
 snowToggleBtn.addEventListener("click", () => {
   snowing = !snowing;
 
@@ -338,28 +341,28 @@ snowToggleBtn.addEventListener("click", () => {
   }
 });
 
-// Animations Snow
+// Create a snowflake animation element.
 function createSnowflake() {
   const snowflake = document.createElement("div");
   snowflake.className = "snowflake";
   snowflake.textContent = "❄️";
 
-  // Random
+  // Random.
   snowflake.style.left = Math.random() * window.innerWidth + "px";
 
-  // Speed
+  // Speed.
   const duration = Math.random() * 3 + 2;
   snowflake.style.animationDuration = `${duration}s`;
 
   document.body.appendChild(snowflake);
 
-  // Delete
+  // Remove snowflake after animation ends.
   setTimeout(() => {
     snowflake.remove();
   }, duration * 1000);
 }
 
-// Initial rendering when the page loads
+// Initial rendering when the page loads.
 updatePersonCount();
 sortContactsByName();
 renderContacts();
